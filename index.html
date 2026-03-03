@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>코딩 동아리 신청 · 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #06060e;
+      --border: #1f1f32;
+      --accent-ai: #818cf8;
+      --accent-gp: #34d399;
+      --text: #e2e2ee;
+      --muted: #555570;
+      --card: #0f0f1d;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Noto Sans KR', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(rgba(129,140,248,0.18) 1px, transparent 1px);
+      background-size: 28px 28px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(100px);
+      pointer-events: none;
+      z-index: 0;
+      animation: drift 14s ease-in-out infinite alternate;
+    }
+    .orb-a { width: 500px; height: 500px; background: rgba(99,102,241,0.13); top: -160px; left: -120px; }
+    .orb-b { width: 360px; height: 360px; background: rgba(52,211,153,0.09); bottom: -80px; right: -80px; animation-delay: -7s; }
+    @keyframes drift { to { transform: translate(30px, 20px); } }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 64px 22px 88px;
+    }
+
+    /* HEADER */
+    header {
+      text-align: center;
+      margin-bottom: 52px;
+      animation: slideDown .7s cubic-bezier(.22,1,.36,1) both;
+    }
+    .year-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent-ai);
+      border: 1px solid rgba(129,140,248,0.35);
+      background: rgba(129,140,248,0.07);
+      padding: 5px 14px;
+      border-radius: 99px;
+      margin-bottom: 22px;
+    }
+    .year-pill span { opacity: .45; }
+    h1 {
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: clamp(2rem, 6.5vw, 3.4rem);
+      line-height: 1.08;
+      letter-spacing: -1.5px;
+      background: linear-gradient(130deg, #fff 25%, #a5b4fc 70%, #6ee7b7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 12px;
+    }
+    .sub {
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 300;
+    }
+
+    /* CARD */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 36px 38px;
+      margin-bottom: 20px;
+      animation: slideUp .7s cubic-bezier(.22,1,.36,1) both;
+    }
+    .card:nth-of-type(1) { animation-delay: .05s; }
+    .card:nth-of-type(2) { animation-delay: .12s; }
+
+    .sec-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2.8px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    /* FIELDS */
+    .fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .full { grid-column: 1/-1; }
+
+    .field label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .field input {
+      width: 100%;
+      background: rgba(255,255,255,0.035);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 11px 15px;
+      color: var(--text);
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 0.93rem;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .field input:focus {
+      border-color: rgba(129,140,248,0.6);
+      box-shadow: 0 0 0 3px rgba(129,140,248,0.1);
+    }
+    .field input::placeholder { color: #2a2a42; }
+
+    /* TABS */
+    .tab-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .tab-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 20px 14px;
+      border-radius: 13px;
+      border: 1.5px solid var(--border);
+      background: rgba(255,255,255,0.018);
+      color: var(--muted);
+      cursor: pointer;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      text-align: center;
+      line-height: 1.4;
+      transition: border-color .22s, background .22s, color .22s, transform .15s;
+    }
+    .tab-btn .ico { font-size: 1.55rem; }
+    .tab-btn:hover:not(.active) {
+      border-color: #33335a;
+      background: rgba(255,255,255,0.04);
+      color: #9999cc;
+      transform: translateY(-1px);
+    }
+    .tab-btn[data-tab="ai"].active {
+      border-color: rgba(129,140,248,0.7);
+      background: rgba(129,140,248,0.1);
+      color: #c7d2fe;
+    }
+    .tab-btn[data-tab="gp"].active {
+      border-color: rgba(52,211,153,0.7);
+      background: rgba(52,211,153,0.09);
+      color: #6ee7b7;
+    }
+
+    /* PANELS */
+    .panel { display: none; margin-top: 20px; animation: popIn .3s cubic-bezier(.22,1,.36,1); }
+    .panel.active { display: block; }
+    @keyframes popIn { from { opacity:0; transform:translateY(8px) scale(.99); } to { opacity:1; transform:none; } }
+
+    .info-box {
+      border-radius: 13px;
+      padding: 24px 26px;
+      border: 1px solid;
+    }
+    .info-box.ai { border-color: rgba(129,140,248,0.25); background: rgba(129,140,248,0.055); }
+    .info-box.gp { border-color: rgba(52,211,153,0.25);  background: rgba(52,211,153,0.055);  }
+
+    .info-box h3 {
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: 1rem;
+      margin-bottom: 16px;
+      letter-spacing: 0.3px;
+    }
+    .info-box.ai h3 { color: #a5b4fc; }
+    .info-box.gp h3 { color: #6ee7b7; }
+
+    .adv-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+    .adv-list li {
+      font-size: 0.855rem;
+      line-height: 1.65;
+      color: #aaaac8;
+      padding-left: 16px;
+      position: relative;
+    }
+    .adv-list li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      top: 2px;
+      font-size: 0.68rem;
+    }
+    .info-box.ai .adv-list li::before { color: #818cf8; }
+    .info-box.gp .adv-list li::before { color: #34d399; }
+
+    /* inline keyword — no orphan bold */
+    .kw {
+      font-weight: 700;
+      filter: brightness(1.4);
+    }
+
+    /* SUBMIT */
+    .submit-wrap {
+      animation: slideUp .7s .18s cubic-bezier(.22,1,.36,1) both;
+    }
+    .submit-btn {
+      width: 100%;
+      padding: 15px;
+      border-radius: 12px;
+      border: none;
+      background: linear-gradient(130deg, #6366f1, #4f46e5 60%, #4338ca);
+      color: #fff;
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 1.5px;
+      cursor: pointer;
+      box-shadow: 0 4px 28px rgba(99,102,241,0.38);
+      transition: opacity .2s, transform .15s, box-shadow .2s;
+      overflow: hidden;
+      position: relative;
+    }
+    .submit-btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+      transform: translateX(-100%);
+      transition: transform .45s;
+    }
+    .submit-btn:hover::after { transform: translateX(100%); }
+    .submit-btn:hover  { opacity: .9; transform: translateY(-1px); box-shadow: 0 8px 36px rgba(99,102,241,0.48); }
+    .submit-btn:active { transform: translateY(1px); }
+    .submit-btn:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+
+    /* TOAST */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) translateY(70px);
+      background: #16162a;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      padding: 13px 22px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      white-space: nowrap;
+      z-index: 200;
+      pointer-events: none;
+      transition: transform .35s cubic-bezier(.34,1.56,.64,1);
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+    .toast.ok  { border-color: rgba(52,211,153,.45); color: #6ee7b7; }
+    .toast.err { border-color: rgba(239,68,68,.45);  color: #fca5a5; }
+
+    @keyframes slideDown { from { opacity:0; transform:translateY(-18px); } to { opacity:1; transform:none; } }
+    @keyframes slideUp   { from { opacity:0; transform:translateY(18px);  } to { opacity:1; transform:none; } }
+
+    @media (max-width: 520px) {
+      .card { padding: 26px 18px; }
+      .fields { grid-template-columns: 1fr; }
+      .full { grid-column: auto; }
+      .tab-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="orb orb-a"></div>
+  <div class="orb orb-b"></div>
+
+  <div class="wrap">
+    <header>
+      <div class="year-pill">2026 <span>·</span> 코딩 동아리</div>
+      <h1>부원 모집 신청</h1>
+      <p class="sub">관심 분야를 선택하고 지원서를 제출하세요</p>
+    </header>
+
+    <form id="regForm" novalidate>
+
+      <!-- 기본 정보 -->
+      <div class="card">
+        <div class="sec-label">기본 정보</div>
+        <div class="fields">
+          <div class="field">
+            <label for="studentId">학번</label>
+            <input type="text" id="studentId" placeholder="예) 10101" required maxlength="10"/>
+          </div>
+          <div class="field">
+            <label for="uname">이름</label>
+            <input type="text" id="uname" placeholder="홍길동" required maxlength="20"/>
+          </div>
+          <div class="field full">
+            <label for="phone">전화번호</label>
+            <input type="tel" id="phone" placeholder="010-0000-0000" required maxlength="13"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- 관심 분야 -->
+      <div class="card">
+        <div class="sec-label">관심 분야 선택</div>
+
+        <div class="tab-grid">
+          <button type="button" class="tab-btn" data-tab="ai">
+            <span class="ico">🤖</span>
+            인공지능
+          </button>
+          <button type="button" class="tab-btn" data-tab="gp">
+            <span class="ico">🎮⚙️</span>
+            게임 개발 &amp; 피지컬 컴퓨팅
+          </button>
+        </div>
+
+        <!-- AI 패널 -->
+        <div class="panel" id="panel-ai">
+          <div class="info-box ai">
+            <h3>🤖 인공지능 트랙</h3>
+            <ul class="adv-list">
+              <li>Python·머신러닝·딥러닝을 체계적으로 익혀 <span class="kw">AI 엔지니어·데이터 사이언티스트</span> 진학에 직결되는 포트폴리오를 완성합니다.</li>
+              <li>서울대·KAIST·POSTECH 등 공대 AI 학과는 SW 역량을 중시하며, 동아리 활동이 <span class="kw">학생부 종합 전형</span>에서 강력한 차별점이 됩니다.</li>
+              <li>ChatGPT API·HuggingFace 등 최신 도구로 실전 프로젝트를 완성해 면접·자소서에서 <span class="kw">구체적인 경험</span>을 어필할 수 있습니다.</li>
+              <li>AI 분야는 2030년까지 국내 IT 직군 중 가장 빠른 성장세로, <span class="kw">취업·진학 경쟁력</span>이 압도적으로 높습니다.</li>
+              <li>선형대수·확률통계와 연계 학습이 가능해 <span class="kw">이공계 심화 수학 역량</span>을 자연스럽게 키울 수 있습니다.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 게임+피컴 패널 -->
+        <div class="panel" id="panel-gp">
+          <div class="info-box gp">
+            <h3>🎮⚙️ 게임 개발 &amp; 피지컬 컴퓨팅 트랙</h3>
+            <ul class="adv-list">
+              <li>Unity·Unreal Engine 게임 제작과 아두이노·라즈베리파이 하드웨어 제어를 동시에 배워 <span class="kw">소프트웨어·하드웨어 융합 역량</span>을 갖춥니다.</li>
+              <li>게임학과·컴퓨터공학과·전기전자공학과·문화콘텐츠학과 모두에 통용되는 <span class="kw">폭넓은 입시 포트폴리오</span>를 구축할 수 있습니다.</li>
+              <li>게임 잼(Game Jam)·로봇 경진대회·과학 올림피아드 수상 실적으로 <span class="kw">수시·특기자 전형</span>에서 객관적인 증빙이 됩니다.</li>
+              <li>C#·C++·회로 설계까지 익혀 <span class="kw">메이커·창업 역량</span>을 기를 수 있으며, 창업 특기자 전형에도 유리합니다.</li>
+              <li>넥슨·크래프톤 등 게임사와 삼성·LG 등 전자업계 모두에서 실무 포트폴리오가 있으면 <span class="kw">인턴·채용 연계</span>가 훨씬 유리합니다.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 제출 -->
+      <div class="submit-wrap">
+        <button type="submit" class="submit-btn" id="submitBtn">신청서 제출하기 →</button>
+      </div>
+
+    </form>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    /* 탭 */
+    let sel = null;
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const t = btn.dataset.tab;
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('panel-' + t).classList.add('active');
+        sel = t;
+      });
+    });
+
+    /* 전화번호 하이픈 */
+    document.getElementById('phone').addEventListener('input', e => {
+      let v = e.target.value.replace(/\D/g, '');
+      if      (v.length <= 3) { /* 그대로 */ }
+      else if (v.length <= 7) v = v.slice(0,3) + '-' + v.slice(3);
+      else                    v = v.slice(0,3) + '-' + v.slice(3,7) + '-' + v.slice(7,11);
+      e.target.value = v;
+    });
+
+    /* 토스트 */
+    function toast(msg, type) {
+      const el = document.getElementById('toast');
+      el.textContent = (type === 'ok' ? '✅  ' : '❌  ') + msg;
+      el.className = 'toast ' + type + ' show';
+      setTimeout(() => el.classList.remove('show'), 3800);
+    }
+
+    /* 제출 */
+    const SHEET_URL  = 'https://script.google.com/macros/s/AKfycbytgN8By0PQiPUl2pEXcTgg9L6w4rpqmI61QriXnr4UrYovzc1IYBl7ximXGY3MRvKr/exec'; // ← URL 교체
+    const TRACK_NAME = { ai: '인공지능', gp: '게임 개발 & 피지컬 컴퓨팅' };
+
+    document.getElementById('regForm').addEventListener('submit', async e => {
+      e.preventDefault();
+      const sid   = document.getElementById('studentId').value.trim();
+      const name  = document.getElementById('uname').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+
+      if (!sid || !name || !phone) { toast('학번·이름·전화번호를 모두 입력해주세요.', 'err'); return; }
+      if (!sel)                    { toast('관심 분야를 선택해주세요.', 'err'); return; }
+      if (!/^010-\d{4}-\d{4}$/.test(phone)) { toast('전화번호 형식을 확인해주세요. (010-0000-0000)', 'err'); return; }
+
+      const btn = document.getElementById('submitBtn');
+      btn.disabled = true; btn.textContent = '제출 중…최대 1분가량 소요';
+
+      try {
+        await fetch(SHEET_URL, {
+          method: 'POST', mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            studentId: sid, name, phone,
+            track: TRACK_NAME[sel],
+            submittedAt: new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' })
+          })
+        });
+        toast('신청이 완료되었습니다! 🎉', 'ok');
+        e.target.reset();
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+        sel = null;
+      } catch {
+        toast('오류가 발생했습니다. 잠시 후 다시 시도해주세요.', 'err');
+      } finally {
+        btn.disabled = false; btn.textContent = '신청서 제출하기 →';
+      }
+    });
+  </script>
+</body>
+</html>
