@@ -430,7 +430,7 @@
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { toast('이메일 형식을 확인해주세요.', 'err'); return; }
 
     const btn = document.getElementById('submitBtn');
-    btn.disabled = true; btn.textContent = '제출 중…';
+    btn.disabled = true; btn.textContent = '제출 중… 최대 1분 소요';
 
     try {
       await fetch(SHEET_URL, {
@@ -455,5 +455,6 @@
 </script>
 </body>
 </html>
+
 
 
