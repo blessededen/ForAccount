@@ -1,123 +1,145 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>코딩 동아리 신청 · 2026</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Gmarket+Sans:wght@700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #06060e;
-      --border: #1f1f32;
-      --accent-ai: #818cf8;
-      --accent-gp: #34d399;
-      --text: #e2e2ee;
-      --muted: #555570;
-      --card: #0f0f1d;
+      --bg:       #f4f6fb;
+      --surface:  #ffffff;
+      --border:   #dde2ef;
+      --border2:  #c8d0e5;
+      --primary:  #3d5afe;
+      --primary-h:#1a3de0;
+      --primary-s:rgba(61,90,254,0.1);
+
+      --text:     #1a1d2e;
+      --sub:      #4a5068;
+      --muted:    #8891aa;
+      --chip-bg:  #eef0f8;
+      --chip-sel: #3d5afe;
+      --shadow:   0 2px 16px rgba(61,90,254,0.08);
+      --shadow-h: 0 6px 28px rgba(61,90,254,0.16);
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       background: var(--bg);
+      background-image:
+        radial-gradient(circle at 10% 10%, rgba(61,90,254,0.07) 0%, transparent 55%),
+        radial-gradient(circle at 90% 90%, rgba(14,168,122,0.07) 0%, transparent 55%);
       color: var(--text);
-      font-family: 'Noto Sans KR', sans-serif;
+      font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
       min-height: 100vh;
-      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
-
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: radial-gradient(rgba(129,140,248,0.18) 1px, transparent 1px);
-      background-size: 28px 28px;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .orb {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(100px);
-      pointer-events: none;
-      z-index: 0;
-      animation: drift 14s ease-in-out infinite alternate;
-    }
-    .orb-a { width: 500px; height: 500px; background: rgba(99,102,241,0.13); top: -160px; left: -120px; }
-    .orb-b { width: 360px; height: 360px; background: rgba(52,211,153,0.09); bottom: -80px; right: -80px; animation-delay: -7s; }
-    @keyframes drift { to { transform: translate(30px, 20px); } }
 
     .wrap {
-      position: relative;
-      z-index: 1;
-      max-width: 720px;
+      max-width: 680px;
       margin: 0 auto;
-      padding: 64px 22px 88px;
+      padding: 56px 20px 80px;
     }
 
-    /* HEADER */
+    /* ── HEADER ── */
     header {
       text-align: center;
-      margin-bottom: 52px;
-      animation: slideDown .7s cubic-bezier(.22,1,.36,1) both;
+      margin-bottom: 44px;
+      animation: fadeDown .65s cubic-bezier(.22,1,.36,1) both;
     }
-    .year-pill {
+    .pill {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      font-size: 10.5px;
-      font-weight: 700;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--accent-ai);
-      border: 1px solid rgba(129,140,248,0.35);
-      background: rgba(129,140,248,0.07);
-      padding: 5px 14px;
+      background: var(--primary-s);
+      color: var(--primary);
+      border: 1px solid rgba(61,90,254,0.22);
       border-radius: 99px;
-      margin-bottom: 22px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      margin-bottom: 18px;
     }
-    .year-pill span { opacity: .45; }
+    .pill .dot { width:6px; height:6px; border-radius:50%; background:var(--primary); animation: blink 1.8s infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+
     h1 {
-      font-family: 'Black Han Sans', sans-serif;
-      font-size: clamp(2rem, 6.5vw, 3.4rem);
-      line-height: 1.08;
+      font-family: 'Gmarket Sans', 'Black Han Sans', sans-serif;
+      font-size: clamp(1.9rem, 5.5vw, 3rem);
+      font-weight: 700;
+      line-height: 1.12;
       letter-spacing: -1.5px;
-      background: linear-gradient(130deg, #fff 25%, #a5b4fc 70%, #6ee7b7 100%);
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+    h1 em {
+      font-style: normal;
+      background: linear-gradient(120deg, var(--primary) 0%, #7b5eff 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      margin-bottom: 12px;
     }
-    .sub {
-      color: var(--muted);
-      font-size: 0.9rem;
-      font-weight: 300;
+    .desc {
+      font-size: 0.95rem;
+      color: var(--sub);
+      font-weight: 400;
+      line-height: 1.6;
     }
 
-    /* CARD */
+    /* ── CARD ── */
     .card {
-      background: var(--card);
+      background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 36px 38px;
-      margin-bottom: 20px;
-      animation: slideUp .7s cubic-bezier(.22,1,.36,1) both;
+      border-radius: 20px;
+      padding: 34px 36px;
+      margin-bottom: 18px;
+      box-shadow: var(--shadow);
+      animation: fadeUp .65s cubic-bezier(.22,1,.36,1) both;
     }
-    .card:nth-of-type(1) { animation-delay: .05s; }
-    .card:nth-of-type(2) { animation-delay: .12s; }
+    .card:nth-of-type(1){ animation-delay:.05s }
+    .card:nth-of-type(2){ animation-delay:.12s }
+    .card:nth-of-type(3){ animation-delay:.19s }
+    .card:nth-of-type(4){ animation-delay:.26s }
 
-    .sec-label {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 2.8px;
-      text-transform: uppercase;
-      color: var(--muted);
+    .card-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
       margin-bottom: 24px;
     }
+    .card-icon {
+      width: 34px; height: 34px;
+      border-radius: 9px;
+      display: grid;
+      place-items: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .ci-blue   { background: rgba(61,90,254,0.12); }
+    .ci-violet { background: rgba(108,61,232,0.12); }
+    .ci-green  { background: rgba(14,168,122,0.12); }
+    .ci-orange { background: rgba(251,140,0,0.12); }
 
-    /* FIELDS */
+    .card-head-text { flex: 1; }
+    .card-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: 0.2px;
+    }
+    .card-sub {
+      font-size: 0.76rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* ── FIELDS ── */
     .fields {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -127,344 +149,309 @@
 
     .field label {
       display: block;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 600;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 8px;
+      color: var(--sub);
+      letter-spacing: 0.4px;
+      margin-bottom: 7px;
     }
-    .field input {
+    .field input,
+    .field textarea {
       width: 100%;
-      background: rgba(255,255,255,0.035);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 11px 15px;
-      color: var(--text);
-      font-family: 'Noto Sans KR', sans-serif;
-      font-size: 0.93rem;
-      outline: none;
-      transition: border-color .2s, box-shadow .2s;
-    }
-    .field input:focus {
-      border-color: rgba(129,140,248,0.6);
-      box-shadow: 0 0 0 3px rgba(129,140,248,0.1);
-    }
-    .field input::placeholder { color: #2a2a42; }
-
-    /* TABS */
-    .tab-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-    .tab-btn {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      padding: 20px 14px;
-      border-radius: 13px;
+      background: var(--bg);
       border: 1.5px solid var(--border);
-      background: rgba(255,255,255,0.018);
-      color: var(--muted);
-      cursor: pointer;
-      font-family: 'Noto Sans KR', sans-serif;
-      font-size: 0.82rem;
-      font-weight: 500;
-      text-align: center;
-      line-height: 1.4;
-      transition: border-color .22s, background .22s, color .22s, transform .15s;
+      border-radius: 10px;
+      padding: 11px 14px;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.93rem;
+      font-weight: 400;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s, background .2s;
+      line-height: 1.55;
     }
-    .tab-btn .ico { font-size: 1.55rem; }
-    .tab-btn:hover:not(.active) {
-      border-color: #33335a;
-      background: rgba(255,255,255,0.04);
-      color: #9999cc;
-      transform: translateY(-1px);
+    .field input:focus,
+    .field textarea:focus {
+      border-color: var(--primary);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(61,90,254,0.1);
     }
-    .tab-btn[data-tab="ai"].active {
-      border-color: rgba(129,140,248,0.7);
-      background: rgba(129,140,248,0.1);
-      color: #c7d2fe;
-    }
-    .tab-btn[data-tab="gp"].active {
-      border-color: rgba(52,211,153,0.7);
-      background: rgba(52,211,153,0.09);
-      color: #6ee7b7;
-    }
+    .field input::placeholder,
+    .field textarea::placeholder { color: var(--muted); font-size: 0.88rem; }
+    .field textarea { resize: vertical; min-height: 100px; }
 
-    /* PANELS */
-    .panel { display: none; margin-top: 20px; animation: popIn .3s cubic-bezier(.22,1,.36,1); }
-    .panel.active { display: block; }
-    @keyframes popIn { from { opacity:0; transform:translateY(8px) scale(.99); } to { opacity:1; transform:none; } }
-
-    .info-box {
-      border-radius: 13px;
-      padding: 24px 26px;
-      border: 1px solid;
-    }
-    .info-box.ai { border-color: rgba(129,140,248,0.25); background: rgba(129,140,248,0.055); }
-    .info-box.gp { border-color: rgba(52,211,153,0.25);  background: rgba(52,211,153,0.055);  }
-
-    .info-box h3 {
-      font-family: 'Black Han Sans', sans-serif;
-      font-size: 1rem;
-      margin-bottom: 16px;
-      letter-spacing: 0.3px;
-    }
-    .info-box.ai h3 { color: #a5b4fc; }
-    .info-box.gp h3 { color: #6ee7b7; }
-
-    .adv-list {
-      list-style: none;
+    /* ── LANGUAGE CHIPS ── */
+    .lang-grid {
       display: flex;
-      flex-direction: column;
-      gap: 11px;
+      flex-wrap: wrap;
+      gap: 8px;
     }
-    .adv-list li {
-      font-size: 0.855rem;
-      line-height: 1.65;
-      color: #aaaac8;
-      padding-left: 16px;
-      position: relative;
+    .lang-chip {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 7px 14px;
+      border-radius: 99px;
+      border: 1.5px solid var(--border);
+      background: var(--chip-bg);
+      color: var(--sub);
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .18s ease;
+      user-select: none;
     }
-    .adv-list li::before {
-      content: '▸';
-      position: absolute;
-      left: 0;
-      top: 2px;
-      font-size: 0.68rem;
+    .lang-chip:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-s); }
+    .lang-chip.selected {
+      border-color: var(--primary);
+      background: var(--primary);
+      color: #fff;
     }
-    .info-box.ai .adv-list li::before { color: #818cf8; }
-    .info-box.gp .adv-list li::before { color: #34d399; }
+    .lang-chip .check { display: none; font-size: 0.75rem; }
+    .lang-chip.selected .check { display: inline; }
 
-    /* inline keyword — no orphan bold */
-    .kw {
-      font-weight: 700;
-      filter: brightness(1.4);
-    }
-
-    /* SUBMIT */
+    /* ── SUBMIT ── */
     .submit-wrap {
-      animation: slideUp .7s .18s cubic-bezier(.22,1,.36,1) both;
+      animation: fadeUp .65s .28s cubic-bezier(.22,1,.36,1) both;
     }
     .submit-btn {
       width: 100%;
       padding: 15px;
-      border-radius: 12px;
+      border-radius: 13px;
       border: none;
-      background: linear-gradient(130deg, #6366f1, #4f46e5 60%, #4338ca);
+      background: linear-gradient(130deg, #3d5afe 0%, #1a3de0 100%);
       color: #fff;
-      font-family: 'Black Han Sans', sans-serif;
+      font-family: inherit;
       font-size: 1rem;
-      letter-spacing: 1.5px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
       cursor: pointer;
-      box-shadow: 0 4px 28px rgba(99,102,241,0.38);
+      box-shadow: 0 4px 20px rgba(61,90,254,0.35);
       transition: opacity .2s, transform .15s, box-shadow .2s;
-      overflow: hidden;
       position: relative;
+      overflow: hidden;
     }
     .submit-btn::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
       transform: translateX(-100%);
-      transition: transform .45s;
+      transition: transform .4s;
     }
     .submit-btn:hover::after { transform: translateX(100%); }
-    .submit-btn:hover  { opacity: .9; transform: translateY(-1px); box-shadow: 0 8px 36px rgba(99,102,241,0.48); }
-    .submit-btn:active { transform: translateY(1px); }
-    .submit-btn:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+    .submit-btn:hover  { opacity:.92; transform:translateY(-1px); box-shadow:0 8px 28px rgba(61,90,254,0.42); }
+    .submit-btn:active { transform:translateY(1px); }
+    .submit-btn:disabled { opacity:.5; cursor:not-allowed; transform:none; }
 
-    /* TOAST */
+    /* ── TOAST ── */
     .toast {
       position: fixed;
-      bottom: 30px;
+      bottom: 28px;
       left: 50%;
       transform: translateX(-50%) translateY(70px);
-      background: #16162a;
-      border: 1px solid var(--border);
-      border-radius: 11px;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
       padding: 13px 22px;
       font-size: 0.88rem;
-      font-weight: 500;
+      font-weight: 600;
       white-space: nowrap;
       z-index: 200;
       pointer-events: none;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
       transition: transform .35s cubic-bezier(.34,1.56,.64,1);
+      color: var(--text);
     }
     .toast.show { transform: translateX(-50%) translateY(0); }
-    .toast.ok  { border-color: rgba(52,211,153,.45); color: #6ee7b7; }
-    .toast.err { border-color: rgba(239,68,68,.45);  color: #fca5a5; }
+    .toast.ok  { border-color: rgba(14,168,122,.5); color: #0a7a5a; }
+    .toast.err { border-color: rgba(229,57,53,.5);  color: #c62828; }
 
-    @keyframes slideDown { from { opacity:0; transform:translateY(-18px); } to { opacity:1; transform:none; } }
-    @keyframes slideUp   { from { opacity:0; transform:translateY(18px);  } to { opacity:1; transform:none; } }
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 20px 0;
+    }
 
-    @media (max-width: 520px) {
-      .card { padding: 26px 18px; }
-      .fields { grid-template-columns: 1fr; }
-      .full { grid-column: auto; }
-      .tab-grid { grid-template-columns: 1fr; }
+    /* ── KEYFRAMES ── */
+    @keyframes fadeDown { from{opacity:0;transform:translateY(-16px)} to{opacity:1;transform:none} }
+    @keyframes fadeUp   { from{opacity:0;transform:translateY(16px)}  to{opacity:1;transform:none} }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:520px){
+      .card { padding:24px 18px; }
+      .fields { grid-template-columns:1fr; }
+      .full { grid-column:auto; }
+      .tab-grid { grid-template-columns:1fr; }
     }
   </style>
 </head>
 <body>
-  <div class="orb orb-a"></div>
-  <div class="orb orb-b"></div>
+<div class="wrap">
 
-  <div class="wrap">
-    <header>
-      <div class="year-pill">2026 <span>·</span> 코딩 동아리</div>
-      <h1>부원 모집 신청</h1>
-      <p class="sub">관심 분야를 선택하고 지원서를 제출하세요</p>
-    </header>
+  <header>
+    <div class="pill"><span class="dot"></span>2026 모집</div>
+    <h1>코딩 동아리<br><em>부원 모집 신청</em></h1>
+    <p class="desc">아래 내용을 작성하고 제출 버튼을 눌러주세요.</p>
+  </header>
 
-    <form id="regForm" novalidate>
+  <form id="regForm" novalidate>
 
-      <!-- 기본 정보 -->
-      <div class="card">
-        <div class="sec-label">기본 정보</div>
-        <div class="fields">
-          <div class="field">
-            <label for="studentId">학번</label>
-            <input type="text" id="studentId" placeholder="예) 10101" required maxlength="10"/>
-          </div>
-          <div class="field">
-            <label for="uname">이름</label>
-            <input type="text" id="uname" placeholder="홍길동" required maxlength="20"/>
-          </div>
-          <div class="field full">
-            <label for="phone">전화번호</label>
-            <input type="tel" id="phone" placeholder="010-0000-0000" required maxlength="13"/>
-          </div>
+    <!-- ① 기본 정보 -->
+    <div class="card">
+      <div class="card-head">
+        <div class="card-icon ci-blue">👤</div>
+        <div class="card-head-text">
+          <div class="card-title">기본 정보</div>
+          <div class="card-sub">학번 · 이름 · 연락처</div>
         </div>
       </div>
-
-      <!-- 관심 분야 -->
-      <div class="card">
-        <div class="sec-label">관심 분야 선택</div>
-
-        <div class="tab-grid">
-          <button type="button" class="tab-btn" data-tab="ai">
-            <span class="ico">🤖</span>
-            인공지능
-          </button>
-          <button type="button" class="tab-btn" data-tab="gp">
-            <span class="ico">🎮⚙️</span>
-            게임 개발 &amp; 피지컬 컴퓨팅
-          </button>
+      <div class="fields">
+        <div class="field">
+          <label for="studentId">학번</label>
+          <input type="text" id="studentId" placeholder="예) 10101" required maxlength="10"/>
         </div>
-
-        <!-- AI 패널 -->
-        <div class="panel" id="panel-ai">
-          <div class="info-box ai">
-            <h3>🤖 인공지능 트랙</h3>
-            <ul class="adv-list">
-              <li>Python·머신러닝·딥러닝을 체계적으로 익혀 <span class="kw">AI 엔지니어·데이터 사이언티스트</span> 진학에 직결되는 포트폴리오를 완성합니다.</li>
-              <li>서울대·KAIST·POSTECH 등 공대 AI 학과는 SW 역량을 중시하며, 동아리 활동이 <span class="kw">학생부 종합 전형</span>에서 강력한 차별점이 됩니다.</li>
-              <li>ChatGPT API·HuggingFace 등 최신 도구로 실전 프로젝트를 완성해 면접·자소서에서 <span class="kw">구체적인 경험</span>을 어필할 수 있습니다.</li>
-              <li>AI 분야는 2030년까지 국내 IT 직군 중 가장 빠른 성장세로, <span class="kw">취업·진학 경쟁력</span>이 압도적으로 높습니다.</li>
-              <li>선형대수·확률통계와 연계 학습이 가능해 <span class="kw">이공계 심화 수학 역량</span>을 자연스럽게 키울 수 있습니다.</li>
-            </ul>
-          </div>
+        <div class="field">
+          <label for="uname">이름</label>
+          <input type="text" id="uname" placeholder="홍길동" required maxlength="20"/>
         </div>
-
-        <!-- 게임+피컴 패널 -->
-        <div class="panel" id="panel-gp">
-          <div class="info-box gp">
-            <h3>🎮⚙️ 게임 개발 &amp; 피지컬 컴퓨팅 트랙</h3>
-            <ul class="adv-list">
-              <li>Unity·Unreal Engine 게임 제작과 아두이노·라즈베리파이 하드웨어 제어를 동시에 배워 <span class="kw">소프트웨어·하드웨어 융합 역량</span>을 갖춥니다.</li>
-              <li>게임학과·컴퓨터공학과·전기전자공학과·문화콘텐츠학과 모두에 통용되는 <span class="kw">폭넓은 입시 포트폴리오</span>를 구축할 수 있습니다.</li>
-              <li>게임 잼(Game Jam)·로봇 경진대회·과학 올림피아드 수상 실적으로 <span class="kw">수시·특기자 전형</span>에서 객관적인 증빙이 됩니다.</li>
-              <li>C#·C++·회로 설계까지 익혀 <span class="kw">메이커·창업 역량</span>을 기를 수 있으며, 창업 특기자 전형에도 유리합니다.</li>
-              <li>넥슨·크래프톤 등 게임사와 삼성·LG 등 전자업계 모두에서 실무 포트폴리오가 있으면 <span class="kw">인턴·채용 연계</span>가 훨씬 유리합니다.</li>
-            </ul>
-          </div>
+        <div class="field full">
+          <label for="phone">전화번호</label>
+          <input type="tel" id="phone" placeholder="010-0000-0000" required maxlength="13"/>
+        </div>
+        <div class="field full">
+          <label for="email">학교 이메일</label>
+          <input type="email" id="email" placeholder="student@school.ac.kr" required/>
         </div>
       </div>
+    </div>
 
-      <!-- 제출 -->
-      <div class="submit-wrap">
-        <button type="submit" class="submit-btn" id="submitBtn">신청서 제출하기 →</button>
+    <!-- ③ 코딩 언어 -->
+    <div class="card">
+      <div class="card-head">
+        <div class="card-icon ci-orange">💻</div>
+        <div class="card-head-text">
+          <div class="card-title">다뤄본 코딩 언어</div>
+          <div class="card-sub">경험 있는 언어를 모두 선택하세요 (없어도 괜찮아요)</div>
+        </div>
       </div>
+      <div class="lang-grid" id="langGrid">
+        <!-- JS로 생성 -->
+      </div>
+    </div>
 
-    </form>
-  </div>
+    <!-- ④ 활동 계획 -->
+    <div class="card">
+      <div class="card-head">
+        <div class="card-icon ci-green">✏️</div>
+        <div class="card-head-text">
+          <div class="card-title">하고 싶은 활동</div>
+          <div class="card-sub">동아리에서 해보고 싶은 것을 자유롭게 써주세요</div>
+        </div>
+      </div>
+      <div class="field">
+        <label for="activity">활동 계획 및 목표</label>
+        <textarea id="activity" placeholder="예) 게임을 직접 만들어 보고 싶습니다. 특히 Unity를 활용한 2D 플랫포머 게임 개발에 도전하고 싶습니다..." rows="5"></textarea>
+      </div>
+    </div>
 
-  <div class="toast" id="toast"></div>
+    <!-- 제출 -->
+    <div class="submit-wrap">
+      <button type="submit" class="submit-btn" id="submitBtn">신청서 제출하기 →</button>
+    </div>
 
-  <script>
-    /* 탭 */
-    let sel = null;
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const t = btn.dataset.tab;
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-        btn.classList.add('active');
-        document.getElementById('panel-' + t).classList.add('active');
-        sel = t;
-      });
-    });
+  </form>
+</div>
 
-    /* 전화번호 하이픈 */
-    document.getElementById('phone').addEventListener('input', e => {
-      let v = e.target.value.replace(/\D/g, '');
-      if      (v.length <= 3) { /* 그대로 */ }
-      else if (v.length <= 7) v = v.slice(0,3) + '-' + v.slice(3);
-      else                    v = v.slice(0,3) + '-' + v.slice(3,7) + '-' + v.slice(7,11);
-      e.target.value = v;
-    });
+<div class="toast" id="toast"></div>
 
-    /* 토스트 */
-    function toast(msg, type) {
-      const el = document.getElementById('toast');
-      el.textContent = (type === 'ok' ? '✅  ' : '❌  ') + msg;
-      el.className = 'toast ' + type + ' show';
-      setTimeout(() => el.classList.remove('show'), 3800);
-    }
-
-    /* 제출 */
-    const SHEET_URL  = 'https://script.google.com/macros/s/AKfycbytgN8By0PQiPUl2pEXcTgg9L6w4rpqmI61QriXnr4UrYovzc1IYBl7ximXGY3MRvKr/exec'; // ← URL 교체
-    const TRACK_NAME = { ai: '인공지능', gp: '게임 개발 & 피지컬 컴퓨팅' };
-
-    document.getElementById('regForm').addEventListener('submit', async e => {
-      e.preventDefault();
-      const sid   = document.getElementById('studentId').value.trim();
-      const name  = document.getElementById('uname').value.trim();
-      const phone = document.getElementById('phone').value.trim();
-
-      if (!sid || !name || !phone) { toast('학번·이름·전화번호를 모두 입력해주세요.', 'err'); return; }
-      if (!sel)                    { toast('관심 분야를 선택해주세요.', 'err'); return; }
-      if (!/^010-\d{4}-\d{4}$/.test(phone)) { toast('전화번호 형식을 확인해주세요. (010-0000-0000)', 'err'); return; }
-
-      const btn = document.getElementById('submitBtn');
-      btn.disabled = true; btn.textContent = '제출 중…최대 1분가량 소요';
-
-      try {
-        await fetch(SHEET_URL, {
-          method: 'POST', mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            studentId: sid, name, phone,
-            track: TRACK_NAME[sel],
-            submittedAt: new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' })
-          })
-        });
-        toast('신청이 완료되었습니다! 🎉', 'ok');
-        e.target.reset();
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-        sel = null;
-      } catch {
-        toast('오류가 발생했습니다. 잠시 후 다시 시도해주세요.', 'err');
-      } finally {
-        btn.disabled = false; btn.textContent = '신청서 제출하기 →';
+<script>
+  /* ── 언어 칩 생성 ── */
+  const LANGS = [
+    'C', 'C++', 'C#', 'Java', 'Python', 'JavaScript',
+    'TypeScript', 'Kotlin', 'Swift', 'Rust', 'Go',
+    'HTML/CSS', 'SQL', 'R', 'MATLAB', 'Arduino(C++)', '없음'
+  ];
+  const grid = document.getElementById('langGrid');
+  LANGS.forEach(lang => {
+    const chip = document.createElement('button');
+    chip.type = 'button';
+    chip.className = 'lang-chip';
+    chip.dataset.lang = lang;
+    chip.innerHTML = `<span class="check">✓</span>${lang}`;
+    chip.addEventListener('click', () => {
+      if (lang === '없음') {
+        // 없음 선택 시 나머지 해제
+        grid.querySelectorAll('.lang-chip').forEach(c => c.classList.remove('selected'));
+        chip.classList.add('selected');
+      } else {
+        // 다른 언어 선택 시 '없음' 해제
+        const noneChip = grid.querySelector('[data-lang="없음"]');
+        if (noneChip) noneChip.classList.remove('selected');
+        chip.classList.toggle('selected');
       }
     });
-  </script>
+    grid.appendChild(chip);
+  });
+
+  /* ── 전화번호 하이픈 ── */
+  document.getElementById('phone').addEventListener('input', e => {
+    let v = e.target.value.replace(/\D/g, '');
+    if      (v.length <= 3) { }
+    else if (v.length <= 7) v = v.slice(0,3) + '-' + v.slice(3);
+    else                    v = v.slice(0,3) + '-' + v.slice(3,7) + '-' + v.slice(7,11);
+    e.target.value = v;
+  });
+
+  /* ── 토스트 ── */
+  function toast(msg, type) {
+    const el = document.getElementById('toast');
+    el.textContent = (type === 'ok' ? '✅  ' : '❌  ') + msg;
+    el.className = 'toast ' + type + ' show';
+    setTimeout(() => el.classList.remove('show'), 3800);
+  }
+
+  const SHEET_URL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
+
+  document.getElementById('regForm').addEventListener('submit', async e => {
+    e.preventDefault();
+
+    const sid      = document.getElementById('studentId').value.trim();
+    const name     = document.getElementById('uname').value.trim();
+    const phone    = document.getElementById('phone').value.trim();
+    const email    = document.getElementById('email').value.trim();
+    const activity = document.getElementById('activity').value.trim();
+    const langs    = [...document.querySelectorAll('.lang-chip.selected')].map(c => c.dataset.lang).join(', ') || '선택 없음';
+
+    if (!sid || !name || !phone || !email) { toast('기본 정보를 모두 입력해주세요.', 'err'); return; }
+    if (!/^010-\d{4}-\d{4}$/.test(phone)) { toast('전화번호 형식을 확인해주세요. (010-0000-0000)', 'err'); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { toast('이메일 형식을 확인해주세요.', 'err'); return; }
+
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true; btn.textContent = '제출 중…';
+
+    try {
+      await fetch(SHEET_URL, {
+        method: 'POST', mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          studentId: sid, name, phone, email,
+          languages: langs,
+          activity,
+          submittedAt: new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' })
+        })
+      });
+      toast('신청이 완료되었습니다! 🎉', 'ok');
+      e.target.reset();
+      document.querySelectorAll('.lang-chip').forEach(c => c.classList.remove('selected'));
+    } catch {
+      toast('오류가 발생했습니다. 잠시 후 다시 시도해주세요.', 'err');
+    } finally {
+      btn.disabled = false; btn.textContent = '신청서 제출하기 →';
+    }
+  });
+</script>
 </body>
 </html>
